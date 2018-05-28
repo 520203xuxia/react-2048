@@ -27,6 +27,15 @@ export default class InputItems extends React.Component {
 			this.setState({
 				value: newValue
 			});
+		} else if (keycode == 190) {
+			const oldValue = this.state.value;
+			const newValue = oldValue + ".";
+			this.setState({
+				value: newValue
+			});
+			this.setState({
+				errorInfo: 'hidden'
+			});
 		} else if (keycode != 13) {
 			this.setState({
 				errorInfo: 'visible'
