@@ -20,25 +20,54 @@ export default class Complete extends React.Component {
 	state = {
 		open: false, //是否点击了‘open’
 		result: [],
+		rest: [],
+		maxIndex: '0',
 	}
 	bagRandom = () => {
 		const person = store.getState().bag[0].person;
 		const amount = store.getState().bag[0].amount;
 		let max = 0;
-		let balance = amount;
 		let random;
+		let balance = amount;
 		let result = [];
+		let rest = [];
 		let i = 0;
-		for (i = 0; i < person - 1; i++) {
-			random = (Math.random() * (balance / 3)).toFixed(2); //生成一个余额范围/2 内的随机数
-			result[i] = random;
-			max = random > max ? random : max;
-			balance -= random;
+		let index = 0;
+		if (person == 0 || amount == 0) {
+			result[0] = 0;
+			rest[0] = 0;
+			this.setState({
+				result: result,
+				rest: rest,
+			})
+			return;
 		}
-		result[i] = balance.toFixed(2);
-		console.log(result);
+		//分配红包算法
+		// 额度在0.01和(剩余平均值x2)之间。 
+		for (i = 0; i < person - 1; i++) {
+			random = (Math.random() * (balance / (person - i)) * 2).toFixed(2);
+			if (random < 0.01) { //保证分配的金额最小为0.01
+				random = 0.01;
+			}
+			result[i] = random;
+			if (random > max) {
+				max = random;
+				index = i;
+			}
+			balance -= random;
+			balance = balance.toFixed(2);
+			rest[i] = balance;
+		}
+		result[i] = (parseFloat(balance)).toFixed(2);
+		rest[i] = 0;
+		if (result[i] > max) {
+			max = result[i];
+			index = i;
+		}
 		this.setState({
 			result: result,
+			rest: rest,
+			maxIndex: index,
 		})
 	}
 	openClick = () => {
@@ -56,25 +85,28 @@ export default class Complete extends React.Component {
 	}
 	renderResult = () => {
 		const {
-			result
+			result,
+			rest,
 		} = this.state;
 		return this.state.open ? (<div className='resultpage'>
 			<div className='receive-info'>
-				<div>收到XX元，剩余XX元</div>
-				<div>不是最佳手气</div>
+				<div>收到{result[0]}元，剩余{rest[0]}元</div>
+		{
+			this.state.maxIndex ? (<div>不是最佳手气</div>) : (<div>是最佳手气</div>)
+		}
 			</div>
 			<div className='receive'>
 				<div className='receive-list'></div>
 				<div className='receive-list-div'>
-					<ul className='result-ul'>
+					<div className='result-list'>
 						{
 							result.map(function(item,index){
 								return (
-									<li>{index+1}、	{item}元</li>
+									<div>{index+1}、<span>获得{item}元</span> <span>剩余{rest[index]}元</span></div>
 									)
 							})
 						}
-					</ul>
+					</div>
 				</div>
 			</div>
 			<div className='footer-back'>
