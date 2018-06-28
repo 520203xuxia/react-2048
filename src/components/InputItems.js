@@ -10,8 +10,10 @@ export default class InputItems extends React.Component {
 		};
 	}
 	keyLimit = (e) => {
+		const reg_int = /^\d{3}$/;
+		const reg_float = /^\d{3}.\d\d?$/;
 		const keycode = e.keyCode;
-		if (keycode >= 48 && keycode <= 57) {
+		if (keycode >= 48 && keycode <= 57) { // 0-9
 			const keychar = String.fromCharCode(keycode);
 			const oldValue = this.state.value;
 			const newValue = oldValue + keychar;

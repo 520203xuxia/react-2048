@@ -1,6 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import '../styles/ButtonItems.scss'
+import {
+	HashRouter,
+	Switch,
+	Route,
+	Link
+} from 'react-router-dom'
 export default class InputItems extends React.Component {
 	constructor(props) {
 		super(props);
@@ -8,11 +14,14 @@ export default class InputItems extends React.Component {
 	}
 	render() {
 		const {
-			text
+			text,
+			to,
+			onClick
 		} = this.props;
+		// onClick();
 		return (
 			<div className='btn-enter'>
-				{this.props.text}
+				<Link to ={to} className='button-text' onClick={onClick}>{this.props.text}</Link>
 			</div>
 		)
 	}
