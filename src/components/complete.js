@@ -13,9 +13,6 @@ import {
 	Link
 } from 'react-router-dom'
 import store from '../store.js';
-
-
-
 export default class Complete extends React.Component {
 	state = {
 		open: false, //是否点击了‘open’
@@ -87,6 +84,7 @@ export default class Complete extends React.Component {
 		const {
 			result,
 			rest,
+			maxIndex
 		} = this.state;
 		return this.state.open ? (<div className='resultpage'>
 			<div className='receive-info'>
@@ -102,7 +100,7 @@ export default class Complete extends React.Component {
 						{
 							result.map(function(item,index){
 								return (
-									<div>{index+1}、<span>获得{item}元</span> <span>剩余{rest[index]}元</span></div>
+									<div>{index+1}、{index==maxIndex?(<span>⭐</span>):null}<span>获得{item}元</span> <span>剩余{rest[index]}元</span></div>
 									)
 							})
 						}
