@@ -1,3 +1,9 @@
+/*
+ **需改进的地方：
+ **1. 检测用户输入不够完善，当按下左右键的时候会触发用户输入不合法设置
+ **2. 人数只能为整数
+ **3. 金额只能两位小数，并且只有一个小数点，目前输入可以是多个小数点和多位小数
+ */
 import React from 'react'
 import ReactDOM from 'react-dom'
 import '../styles/InputItems.scss'
@@ -13,6 +19,7 @@ export default class InputItems extends React.Component {
 		const reg_int = /^\d{3}$/;
 		const reg_float = /^\d{3}.\d\d?$/;
 		const keycode = e.keyCode;
+		console.log(keycode, 'keycode');
 		if (keycode >= 48 && keycode <= 57) { // 0-9
 			const keychar = String.fromCharCode(keycode);
 			const oldValue = this.state.value;

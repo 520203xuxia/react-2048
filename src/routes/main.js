@@ -1,18 +1,20 @@
 import {
+	HashRouter as Router,
 	Switch,
 	Route,
 	BrowserRouter
 } from 'react-router-dom'
 import React from 'react'
-
 import Container from '../components/Container'
-import Parent from '../components/Parent'
+import complete from '../components/complete'
 
-const Main = () => (
-	<BrowserRouter>
-    <Switch>
-      <Route exact path='/' component={Container}/>
-      <Route path='/Parent' component={Parent}/>
-    </Switch>
-  </BrowserRouter>
-)
+export default () => {
+	return (
+		<Router>
+      <Switch>
+				<Route exact path='/' component={Container} />
+				<Route path='/complete'  component={complete}/>
+      </Switch>
+    </Router>
+	)
+}

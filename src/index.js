@@ -1,22 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Container from './components/Container'
-import complete from './components/complete'
 import {
+	HashRouter as Router,
 	BrowserRouter,
 	Route,
 	Switch
 } from 'react-router-dom'
+import {
+	Provider
+} from 'react-redux';
+import store from './store.js';
+import Main from './routes/main'
 import registerServiceWorker from './registerServiceWorker';
 // ReactDOM.render(
 // 	<Container/>, document.getElementById('root'));
 // registerServiceWorker();
 ReactDOM.render(
-	(<BrowserRouter> 
-		<Switch>
-	<Route exact path='/' component={Container} />
-	<Route path='/complete'  component={complete}/>
-		</Switch>
-	</BrowserRouter>), document.getElementById('root'));
+	<Provider store={store}>
+    <Main/>
+  </Provider>,
+	document.getElementById('root'));
 registerServiceWorker();

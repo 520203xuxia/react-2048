@@ -3,15 +3,6 @@ import {
 } from '../action/send_action';
 
 const initialState = {
-  // cart: [{
-  //   product: 'bread 700g',
-  //   quantity: 2,
-  //   unitCost: 90
-  // }, {
-  //   product: 'milk 500ml',
-  //   quantity: 1,
-  //   unitCost: 47
-  // }]
   bag: [{
     person: '0',
     amount: '0',
