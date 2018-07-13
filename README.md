@@ -7,4 +7,4 @@
 
 
 项目演示地址
-[Demo] (https://520203xuxia.github.io/small-red-bag-xiaoxu/static/index)
+[Demo] (https://520203xuxia.github.io/small-red-bag-xiaoxu/build/index)
