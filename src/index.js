@@ -13,9 +13,6 @@ import {
 import store from './store.js';
 import Main from './routes/main'
 import registerServiceWorker from './registerServiceWorker';
-// ReactDOM.render(
-// 	<Container/>, document.getElementById('root'));
-// registerServiceWorker();
 ReactDOM.render(
 	<Provider store={store}>
     <Main/>
